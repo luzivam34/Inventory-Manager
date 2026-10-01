@@ -4,8 +4,8 @@ from flask import Flask
 def create_app():
     app = Flask(__name__)
 
-    @app.route("/")
-    def index():
-        return "<h1>Ola, mundo!</h1>"
+    from .routes.main_routes import main_bp
+
+    app.register_blueprint(main_bp)
 
     return app
