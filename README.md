@@ -1,2 +1,11 @@
 # Inventory-Manager
-gerenciado no Pc 
+Gerenciador de Estoque
+
+
+````bash 
+Struture
+
+Inventory-Manager/
+|_ backend/
+
+````
