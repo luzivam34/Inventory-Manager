@@ -12,7 +12,12 @@ def create_app():
 
 
     from .routes.main_routes import main_bp
+    from .routes.produtos_route import produto_bp
 
     app.register_blueprint(main_bp)
+    app.register_blueprint(produto_bp)
+
+    with app.app_context():
+        db.create_all()
 
     return app
