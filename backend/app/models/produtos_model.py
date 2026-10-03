@@ -8,8 +8,17 @@ class Produto(db.Model):
     nome = db.Column(db.String(120), nullable=False)
     descricao = db.Column(db.text, nullable=True)
     preco = db.Column(db.Float, nullable=False, default=0.0)
-    quntidade = db.Column(db.Integer, nullable=False, default=0)
+    quantidade = db.Column(db.Integer, nullable=False, default=0)
     criado_em = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __init__(self, nome, descricao, preco, quantidade, criado_em):
+        self.nome = nome
+        self.descricao = descricao
+        self.preco = preco
+        self.quantidade = quantidade
+        self.criado_em = criado_em
+    
+
 
     def to_dict(self):
         return {
