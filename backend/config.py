@@ -1,4 +1,3 @@
-import psycopg2
 import os
 from dotenv import load_dotenv
 
@@ -8,3 +7,8 @@ class Config:
     SECRET_KEY = os.getenv("SECRET_KEY")
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    if not SECRET_KEY:
+        raise ValueError("SECRET_KEY não definido no .env")
+    if not SQLALCHEMY_DATABASE_URI:
+        raise ValueError("DATABASE_URL não defindo no .env")
