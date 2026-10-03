@@ -7,6 +7,6 @@ main_bp = Blueprint("mainbp", __name__)
 @main_bp.route("/")
 def index():
     return jsonify({
-        "menssage": "api funcionando!",
+        "menssage": "The API is working correctly!",
         "status": "ok"
         })
