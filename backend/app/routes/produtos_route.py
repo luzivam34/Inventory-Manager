@@ -8,7 +8,7 @@ produto_bp = Blueprint("produto_bp", __name__)
 # ___________________________________
 # LISTA DE PRODUTOS
 # ___________________________________
-@produto_bp.route("/", methods=["GET"])
+@produto_bp.route("", methods=["GET"])
 def listar_produtos():
     produtos=Produto.query.all()
     return jsonify(
@@ -19,7 +19,7 @@ def listar_produtos():
 # CRIAR PRODUTOS
 # ____________________________________
 
-@produto_bp.route("/", methods=["POST"])
+@produto_bp.route("", methods=["POST"])
 def criar_produto():
     data = request.json or {}
 
@@ -35,8 +35,7 @@ def criar_produto():
             nome=data.get("nome"),
             descricao = data.get("descricao"),
             preco=float(data.get("preco", 0)),
-            quantidade=int(data.get("quantidade", 0)),
-            criado_em=data.get("criado_em")
+            quantidade=int(data.get("quantidade", 0))
             )
         db.session.add(p)
         db.session.commit()

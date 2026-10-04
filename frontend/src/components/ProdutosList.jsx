@@ -29,6 +29,27 @@ export default function ProdutosList() {
         }
 
     };
+    const handleAtualizar = async (id) => {
+        if (!window.confirm("Deseja editar o produto?")) return;
+
+        //Pedir um novo dados via prompt
+        const novoNome = prompt("digite o novo nome do produto:");
+        const novoPreco = prompt("digite o novo preço:");
+        try {
+            const res = await api.put(`produtos/${id}`, {
+                nome: novoNome,
+                preco: parseFloat(novoPreco)
+            });
+
+            //atualizar a lista local com os dados retornados
+            setProdutos(produtos.map(p => p.id === id ? res.data : p));
+            alert("Produtos atualizado com sucesso!");
+
+        } catch (err) {
+            console.error(err);
+            alert("Erro ao tentar editar o Produto: " + (err.response?.data?.message || err.message));
+        }
+    };
 
     return (
         <div>
@@ -38,6 +59,10 @@ export default function ProdutosList() {
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
+                        <th>Preço</th>
+                        <th>Quantidade</th>
+                        <th>Descrição</th>
+                        <th>Criado em</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -46,7 +71,12 @@ export default function ProdutosList() {
                         <tr key={p.id}>
                             <td>{p.id}</td>
                             <td>{p.nome}</td>
+                            <td>{p.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</td>
+                            <td>{p.quantidade}</td>
+                            <td>{p.descricao}</td>
+                            <td>{new Date(p.criado_em).toLocaleDateString("pt-BR")}</td>
                             <td>
+                                <button onClick={() => handleAtualizar(p.id)}>Editar</button>
                                 <button onClick={() => handleDelete(p.id)}>Deletar</button>
                             </td>
                         </tr>
