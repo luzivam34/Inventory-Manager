@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
+import "../styles/ProdutosList.css";
+
 
 
 export default function ProdutosList() {
+    const [mensagem, setMensagem] = useState("")
     const [produtos, setProdutos] = useState([]);
 
     const fetchProdutos = async () => {
@@ -12,7 +15,7 @@ export default function ProdutosList() {
 
         } catch (err) {
             console.error(err);
-            alert("Erro ao buscar produtos");
+            setMensagem("Erro ao buscar produtos");
         }
     }
 
@@ -77,12 +80,13 @@ export default function ProdutosList() {
                             <td>{new Date(p.criado_em).toLocaleDateString("pt-BR")}</td>
                             <td>
                                 <button onClick={() => handleAtualizar(p.id)}>Editar</button>
-                                <button onClick={() => handleDelete(p.id)}>Deletar</button>
+                                <button className="delete" onClick={() => handleDelete(p.id)}>Deletar</button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            {mensagem}
         </div>
     )
 };

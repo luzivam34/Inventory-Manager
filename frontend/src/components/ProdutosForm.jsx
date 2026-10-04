@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
+import "../styles/ProdutosForm.css"
 
 
 export default function ProdutosForm() {
@@ -24,7 +25,7 @@ export default function ProdutosForm() {
     };
 
     return (
-        <div>
+        <div className="form-container">
             <h1>Cadastrar Produtos</h1>
             <form onSubmit={handleSubmit}>
 

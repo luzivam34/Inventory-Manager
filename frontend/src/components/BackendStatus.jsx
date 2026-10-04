@@ -24,14 +24,11 @@ export default function BackendStatus() {
 
     return (
 
-        <div>
+        <div className='status-container'>
             <h3>Status do backend:</h3>
-            <span style={{
-                padding: "8px 12px",
-                borderRadius: "8px",
-                color: "white",
-                backgroundColor: "connected" ? "green" : "red"
-            }}>
+            <span
+                className={connected ? "status-connected" : "status-disconnected"}
+            >
                 {connected ? "Conectado" : "Desconctado"}
             </span>
         </div>
